@@ -39,32 +39,26 @@ def get_protocol_date_from_pdf_file(filepath):
         print("This protocoll needs OCR embedding")
 
     # search for date in the format 12. Oktober 2022
-    match = re.search(r"\d{1,2}\s*\.\s*[\D]+\s*\d{4}", text)
+    match = re.search(r"\b(\d{1,2}\.\s*\w+\s*\d{4})\b", text)
     if match is not None:
-        date = match.group(0).replace(" ", "").replace(".", "")
-        if date[1] == ".":
-            date = "0" + date
+        date_str = match.group(0).replace(" ", "")
         # find it in the german format
         try:
-            date = datetime.datetime.strptime(date, "%d%B%Y").date().strftime("%d.%m.%Y") 
+            date_str = datetime.datetime.strptime(date_str, "%d.%B%Y").date().strftime("%d.%m.%Y") 
+            return date_str
         except ValueError:
-            date = "Datum unbekannt"
-        return date
-    
+            pass
+
     # search for date in the format 12.10.2022
-    match = re.search(r"\d{1,2}\s*\.\s*\d{1,2}\s*\.\s*\d{4}", text)
+    match = re.search(r"\b(\d{1,2}\.\s*\d{1,2}\.\s*\d{4})\b", text)
     if match is not None:
-        date = match.group(0).replace(" ", "").replace(".", "")
-        if date[1] == ".":
-            date = "0" + date
-        if date[4] == ".":
-            date = date[:3] + "0" + date[3:]
+        date_str = match.group(0).replace(" ", "")
         try:
-            date = datetime.datetime.strptime(date, "%d%m%Y").date().strftime("%d.%m.%Y")
+            date_str = datetime.datetime.strptime(date_str, "%d%m%Y").date().strftime("%d.%m.%Y")
+            return date_str
         except ValueError:
-            date = "Datum unbekannt"
-        return date
-    
+            pass
+    pdfFileObj.close()
     return "Datum unbekannt"
 
 
@@ -155,6 +149,8 @@ def save_protocol_pages_to_txt(filepath):
         if not os.path.isfile(txt_filename):
             pageObj = pdfReader.pages[page]
             text = pageObj.extract_text()
+            if page < 2:
+                print("page" + str(page) + ":\n" + text)
             with open(txt_filename, "w") as text_file:
                 text_file.write(text)
     pdfFileObj.close()
