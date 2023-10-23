@@ -73,12 +73,12 @@ function setToggleAccessible(currentTarget) {
 function findProtocolDates() {
   const protocols = document.querySelectorAll('.container');
   const procolDates = {};
+  const datePattern = /^\d{2}\.\d{2}\.\d{4}$/
 
   protocols.forEach((container) => {
-    const dateElement = container.querySelector('.date');
-    const dateString = dateElement.textContent;
+    const dateString = container.querySelector('.date').textContent;
 
-    if (dateString === 'Datum unbekannt') {
+    if (!datePattern.test(dateString)) {
       return;
     }
     const [day, month, year] = dateString.split('.');
