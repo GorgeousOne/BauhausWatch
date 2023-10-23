@@ -1,93 +1,101 @@
 
 .range_container {
-    display: flex;
-    flex-direction: column;
-    max-width: 600px;
-    margin: 40px auto;    
-    
-    --slider-height: 5px;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 40px auto;
+  
+  --slider-height: 5px;
 }
 
 .range_container > * {
   margin-bottom: 10px;
 }
-  
+
 .sliders_control {
-    position: relative;
-    min-height: 20px;
+  position: relative;
+  min-height: 20px;
 }
-  
+
 .form_control {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
 }
-  
-  /* knob look */
+
+/* knob look */
 input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    pointer-events: all;
-    width: 40px;
-    height: 40px;
-    background-color: var(--card-color);
-    border-radius: 50%;
-    border: 2px solid var(--accent-color);
-    cursor: pointer;
+  -webkit-appearance: none;
+  pointer-events: all;
+  width: 40px;
+  height: 40px;
+  background-color: var(--card-color);
+  border-radius: 50%;
+  border: 2px solid var(--accent-color);
+  cursor: pointer;
 }
-  
+
 input[type=range]::-moz-range-thumb {
-    -webkit-appearance: none;
-    pointer-events: all;
-    width: 24px;
-    height: 24px;
-    background-color: var(--card-color);
-    border-radius: 50%;
-    border: 2px solid var(--accent-color);
-    cursor: pointer;  
+  -webkit-appearance: none;
+  pointer-events: all;
+  width: 40px;
+  height: 40px;
+  background-color: var(--card-color);
+  border-radius: 50%;
+  border: 2px solid var(--accent-color);
+  cursor: pointer;
 }
 
 #fromSlider::-webkit-slider-thumb {
-    margin-top: var(--slider-height);
-}
-  
-#fromSlider::-moz-range-thumb {
-    margin-top: var(--slider-height);
+  margin-top: var(--slider-height);
 }
 
-input[type=range]::-webkit-slider-thumb:hover {
-    background-color: var(--accent-color);
+#fromSlider::-moz-range-thumb {
+  margin-top: var(--slider-height);
 }
-  
-  /* knob highlighting when pressing */
-  input[type=range]::-webkit-slider-thumb:active {
-    background-color: var(--accent-color);
-  }
-  
-  input[type="number"] {
-    color: #8a8383;
-    width: 50px;
-    height: 30px;
-    font-size: 20px;
-    border: none;
-  }
-  
-  input[type=number]::-webkit-inner-spin-button, 
-  input[type=number]::-webkit-outer-spin-button {  
-     opacity: 1;
-  }
-  
-  /* bar thingy */
-  input[type="range"] {
-    -webkit-appearance: none; 
-    appearance: none;
-    height: var(--slider-height);
-    width: 100%;
-    position: absolute;
-    background-color: var(--card-color);
-    pointer-events: none;
-  }
-  
-  #fromSlider {
-    height: 0;
-    z-index: 1;
-  }
+
+/* knob highlighting when pressing */
+input[type=range]::-webkit-slider-thumb:hover {
+  background-color: var(--accent-color);
+}
+
+input[type=range]::-moz-range-thumb:hover {
+  background-color: var(--accent-color);
+}
+
+input[type=range]::-webkit-slider-thumb:active {
+  background-color: var(--accent-color);
+}
+
+input[type=range]::-moz-range-thumb:active {
+  background-color: var(--accent-color);
+}
+
+input[type="number"] {
+  color: #8a8383;
+  width: 50px;
+  height: 30px;
+  font-size: 20px;
+  border: none;
+}
+
+input[type=number]::-webkit-inner-spin-button
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+/* bar thingy */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: var(--slider-height);
+  width: 100%;
+  position: absolute;
+  background-color: var(--card-color);
+  pointer-events: none;
+}
+
+#fromSlider {
+  height: 0;
+  z-index: 1;
+}
